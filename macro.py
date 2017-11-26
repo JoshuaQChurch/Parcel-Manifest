@@ -14,7 +14,8 @@ def upload():
 
     # Configure your settings here.
     title = "Select your file"
-    filetypes = (("excel workbook", "*.xlsx"), ("excel macro enabled", "*.xlsm"), ("csv files", "*.csv"))
+    filetypes = (("Excel Workbook", "*.xlsx"), ("Legacy Excel Worksheets", "*.xls"),          
+        ("Excel Macro-enabled Workbook", "*.xlsm"), ("Comma Separated Values", "*.csv"))
 
     # Set the initial starting directory
     initialdir = os.path.join(os.path.join(os.environ["USERPROFILE"]), "Desktop")
@@ -92,8 +93,16 @@ def commands():
 
     global data
  
+    counter = 0 
+
     # Loop and execute all commands
     for datum in data:
+
+        # Pause after each set of 100 
+        # entries to give the program
+        # time to catch up
+        if (counter > 0) and (counter % 100) == 0:
+            time.sleep(3)
 
         # Write values to screen
         pyautogui.typewrite(str(datum))
@@ -113,6 +122,8 @@ def commands():
         # Press 'f19'
         pyautogui.keyDown("f12")
         pyautogui.keyUp("f12")
+
+        counter += 1
 
 
 
