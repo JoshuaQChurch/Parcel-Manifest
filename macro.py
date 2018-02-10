@@ -31,7 +31,7 @@ def upload():
             option_select(data)
 
         # Handler for Excel-specific files
-        elif filename.rsplit(".")[1] in ["xlsx", "xls", "xlxsm"]:
+        elif filename.rsplit(".")[1] in ["xlsx", "xls", "xlsm"]:
             data = pd.read_excel(filename)
             option_select(data)
 
