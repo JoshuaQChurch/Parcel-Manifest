@@ -1,9 +1,9 @@
-# Reprint Tool / Macro
+# Parcel Manifest Macro
 
 **THIS IS NOT A PRODUCT OF WILLIAMS-SONOMA NOR DID THEY HAVE ANY SAY OR DEVELOPMENT IN THE TOOL.**
 
 ## Purpose 
-The following tool was built to automate the process of entering data during the NO LOC process. 
+The following tool was built to allow a user to manifest open cartons and/or reprint cartons for Williams Sonoma.
 
 ## Setup 
 1. Download and install [Python 3.](https://www.python.org/downloads/)
