@@ -17,6 +17,7 @@ class MainApplication:
     
     1: Reprint 
     2. Carton Manifest 
+    3. Salesman Code Maintenance 
     """
 
     def __init__(self, root):
@@ -63,18 +64,23 @@ class MainApplication:
         # Used for carton manifest "Next" and "Retry" functionality.
         self.previous_page = None
 
-        self.__set_geometry(width = 300, height = 190)
+        self.__set_geometry(width = 300, height = 300)
         tk.Label(self.root, text = "Select Macro", font = ("Arial", 16, "bold")).place(x = 80, y = 10)
 
         # Reprint Selection
-        reprint_button = tk.Button(self.root, text="Reprint", command=lambda: self.__config_reprint())
+        reprint_button = tk.Button(self.root, text = "Reprint", command = lambda: self.__config_reprint())
         reprint_button.config(height = 4, width = 9, font = ("Arial", 16))
         reprint_button.place(x = 20, y = 60)
         
         # Carton Manifest Selection
-        carton_manifest_button = tk.Button(self.root, text="Carton\nManifest", command=lambda: self.__config_carton_manifest())
-        carton_manifest_button.config(height = 4, width = 9, font=("Arial", 16))
+        carton_manifest_button = tk.Button(self.root, text = "Carton\nManifest", command = lambda: self.__config_carton_manifest())
+        carton_manifest_button.config(height = 4, width = 9, font = ("Arial", 16))
         carton_manifest_button.place(x = 155, y = 60)
+
+        # Salesman Code Maintenance
+        salesman_code_button = tk.Button(self.root, text = "Salesman Code\n Maintenance", command = lambda: self.__config_salesman_code())
+        salesman_code_button.config(height = 3, width = 20, font = ("Arial", 16))
+        salesman_code_button.place(x = 25, y = 190)
 
 
     """ Clear the window frame, and set the frame dimensions """
@@ -107,7 +113,7 @@ class MainApplication:
         label.config(font = ("Arial", 16))
         label.place(x = 0, y = 45)
 
-        label = tk.Label(self.root, text = "1. Click the \"Upload\" button.")
+        label = tk.Label(self.root, text = "1. Click the \"Select File\" button.")
         label.config(font = ("Arial", 12))
         label.place(x = 25, y = 70)
 
@@ -140,7 +146,7 @@ class MainApplication:
         label.config(font = ("Arial", 12, "italic"))
         label.place(x = 140, y = 270)
 
-        button = tk.Button(self.root, text = "Upload", command = lambda: self.__upload())
+        button = tk.Button(self.root, text = "Select\nFile", command = lambda: self.__upload())
         button.config(height = 3, width = 10, font = ("Arial", 12, "bold"))
         button.place(x = 20, y = 300)
 
@@ -157,7 +163,7 @@ class MainApplication:
     def __verify_reprint(self):
 
         if self.data is None:
-            self.__error(message = "Please upload a file to proceed.")
+            self.__error(message = "Please select a file to proceed.")
             return()
 
         columns = self.data.columns.values.tolist()
@@ -291,7 +297,7 @@ class MainApplication:
         button.config(height = 2, width = 9, font = ("Arial", 12, "bold"))
         button.place(x = 235, y = 110)
 
-        if self.macro == "reprint":
+        if self.macro == "reprint" or self.macro == "salesman_code":
 
             button = tk.Button(self.root, text = "Return to\nMain Menu", command = lambda: self.__confirm_main_menu())
             button.config(height = 3, width = 20, font=("Arial", 12, "bold"))
@@ -319,6 +325,9 @@ class MainApplication:
 
         elif self.macro == "carton_manifest":
             self.__carton_manifest_macro()
+
+        elif self.macro == "salesman_code":
+            self.__salesman_code_macro()
 
 
     """ Allow user to go back to previous page. """ 
@@ -387,7 +396,7 @@ class MainApplication:
         label.config(font = ("Arial", 16))
         label.place(x = 0, y = 40)
 
-        label = tk.Label(self.root, text = "1. Click the \"Upload\" button.")
+        label = tk.Label(self.root, text = "1. Click the \"Select File\" button.")
         label.config(font = ("Arial", 12))
         label.place(x = 25, y = 70)
 
@@ -415,7 +424,7 @@ class MainApplication:
         label.config(font = ("Arial", 12, "italic"))
         label.place(x = 140, y = 240)
 
-        button = tk.Button(self.root, text = "Upload", command = lambda: self.__upload())
+        button = tk.Button(self.root, text = "Select\nFile", command = lambda: self.__upload())
         button.config(height = 3, width = 10, font = ("Arial", 12, "bold"))
         button.place(x = 20, y = 270)
 
@@ -432,7 +441,7 @@ class MainApplication:
     def __verify_carton_manifest(self):
 
         if self.data is None:
-            self.__error(message = "Please upload a file to proceed.")
+            self.__error(message = "Please select a file to proceed.")
             return()
 
         columns = self.data.columns.values.tolist()
@@ -732,6 +741,149 @@ class MainApplication:
 
         except:
             self.__remove_problem_cells()
+
+
+    """ Configuration settings for the salesman code maintenance macro """
+    def __config_salesman_code(self):
+
+        self.macro = "salesman_code"
+        self.__set_geometry(width = 400, height = 420, resizable = True)
+
+        label = tk.Label(self.root, text = "Salesman Code Maintenance Macro Instructions")
+        label.config(font = ("Arial", 12, "bold"))
+        label.place(x = 10, y = 10)
+
+        label = tk.Label(self.root, text = '-'*65)
+        label.config(font = ("Arial", 16))
+        label.place(x = 0, y = 45)
+
+        label = tk.Label(self.root, text = "1. Click the \"Select File\" button.")
+        label.config(font = ("Arial", 12))
+        label.place(x = 25, y = 70)
+
+        label = tk.Label(self.root, text = "2. Select data file.")
+        label.config(font = ("Arial", 12))
+        label.place(x = 25, y = 100)
+
+        label = tk.Label(self.root, text = "a. This file must contain 3 columns: ")
+        label.config(font = ("Arial", 12))
+        label.place(x = 40, y = 130)
+
+        label = tk.Label(self.root, text = "(1) Must be the \"code\" values.")
+        label.config(font = ("Arial", 12))
+        label.place(x = 55, y = 160)
+
+        label = tk.Label(self.root, text = "(2) Must be the \"style\" values.")
+        label.config(font = ("Arial", 12))
+        label.place(x = 55, y = 190)
+
+        label = tk.Label(self.root, text = "(3) Must be the \"suffix\" values.")
+        label.config(font = ("Arial", 12))
+        label.place(x = 55, y = 220)
+
+        label = tk.Label(self.root, text = "3. Click the \"Submit\" button.")
+        label.config(font = ("Arial", 12))
+        label.place(x = 25, y = 250)
+
+        label = tk.Label(self.root, text = "Selected File: ")
+        label.config(font = ("Arial", 12, "bold"))
+        label.place(x = 25, y = 300)
+
+        label = tk.Label(self.root, textvariable = self.uploaded_file)
+        label.config(font = ("Arial", 12, "italic"))
+        label.place(x = 140, y = 300)
+
+        button = tk.Button(self.root, text = "Select\nFile", command = lambda: self.__upload())
+        button.config(height = 3, width = 10, font = ("Arial", 12, "bold"))
+        button.place(x = 20, y = 330)
+
+        button = tk.Button(self.root, text = "Submit", command = lambda: self.__verify_salesman_code())
+        button.config(height = 3, width = 10, font = ("Arial", 12, "bold"))
+        button.place(x = 145, y = 330)
+
+        button = tk.Button(self.root, text = "Return to\nMain Menu", command = lambda: self.__confirm_main_menu())
+        button.config(height = 3, width = 10, font = ("Arial", 12, "bold"))
+        button.place(x = 270, y = 330)
+
+
+    """ Verify the requirements for the salesman code maintenance macro. """ 
+    def __verify_salesman_code(self):
+
+        if self.data is None:
+            self.__error(message = "Please select a file to proceed.")
+            return()
+
+        columns = self.data.columns.values.tolist()
+        
+        if len(columns) != 3:
+            self.__error("This file must contain 3 columns.")
+            return()
+
+        for i in self.data.iloc[:, 0]:
+            if len(str(i)) != 3:
+                self.__error("Each value in column 1 must be 3 characters.")
+                return()
+
+        for i in self.data.iloc[:, 1]:
+            if len(str(i)) > 7:
+                self.__error("Each value in column 2 must be between 5-7 characters.")
+                return()
+
+        for i in self.data.iloc[:, 2]:
+            if len(str(i)) != 2:
+                self.__error("Each value in column 3 must be 2 characters.")
+                return()
+
+        self.__set_position_instructions()  
+
+
+    """ Salesman code maintenance macro commands """
+    def __salesman_code_macro(self):
+
+        code = self.data.iloc[:, 0]
+        style = self.data.iloc[:, 1]
+        suffix = self.data.iloc[:, 2]
+
+        # Catch pyautogui.FAILSAFE.
+        try:
+            for i in range(len(self.data)):
+
+                # Pause after each set of 100 entries to give the program time to catch up
+                if (i > 0) and (i % 100) == 0:
+                    time.sleep(3)
+
+                # Press 'f6'
+                pyautogui.keyDown("f6")
+                pyautogui.keyUp("f6")
+
+                # Enter 'code'
+                pyautogui.typewrite(str(code[i]).upper())
+
+                # Enter 'style'
+                pyautogui.typewrite(str(style[i]))
+
+                # Enter 'tab'
+                pyautogui.keyDown("tab")
+                pyautogui.keyUp("tab")
+
+                # Enter 'suffix'
+                pyautogui.typewrite(str(suffix[i]).upper())
+
+                # Enter 'enter'
+                pyautogui.keyDown("enter")
+                pyautogui.keyUp("enter")
+
+                # Enter 'f16' = 'shift' + 'f4'
+                pyautogui.keyDown("shift")
+                pyautogui.keyDown("f4")
+                pyautogui.keyUp("f4")
+                pyautogui.keyUp("shift")
+
+            messagebox.showinfo("Complete", "The macro is finished. Returning to main menu.")
+            self.__main_menu()
+
+        except:
+            messagebox.showinfo("Stop", "Failsafe activated. The macro has stopped.")
 
 
     """ Error helper function """
