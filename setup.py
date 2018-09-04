@@ -1,21 +1,30 @@
-import os
-import pip
-    
-if __name__ == "__main__":
-    
-    if os.name == 'nt':
-        requirements = ("pandas", 
-                        "xlrd", 
-                        "pyautogui")
-    
-    else:
-        requirements = ("pandas", 
-                        "xlrd", 
-                        "pyobjc-core",
-                        "pyobjc-framework-Quartz",
-                        "image",
-                        "pyautogui")
+from setuptools import setup
+import platform
 
-    for req in requirements:
-        pip.main(["install", req])
+if platform.system() == "Windows":
+    install_requires = [
+        "pandas",
+        "xlrd",
+        "pyautogui"
+    ]
+
+else:
+    install_requires = [
+        "pandas",
+        "xlrd",
+        "pyobjc-core",
+        "pyobjc-framework-Quartz",
+        "image",
+        "pyautogui"
+    ]
+
+setup(
+    name = "Parcel Manifest",
+    version = "1.0",
+    description = "Automation tool to assist with mundane tasks.",
+    author = "Joshua Church",
+    author_email = "Joshua.Q.Church@gmail.com",
+    url = "https://github.com/JoshuaQChurch/Parcel-Manifest",
+    install_requires = install_requires
+)
 
