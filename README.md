@@ -15,8 +15,10 @@ The following tool was built to allow a user to manifest open cartons and/or rep
    * Click *Download ZIP*
    * Unzip the file. 
 
-3. Install additional dependencies 
-   * Run *setup.py*
+3. Install additional dependencies
+   * Open *CMD Prompt* on Windows or *Terminal* on Unix.
+   * Navigate to filepath of the downloaded files.
+   * Run the following command: *python setup.py install*
    
 4. Place the *macro.py* file in your preferred location on your device
 
