@@ -1,22 +1,10 @@
 from setuptools import setup
-import platform
 
-if platform.system() == "Windows":
-    install_requires = [
-        "pandas",
-        "xlrd",
-        "pyautogui"
-    ]
-
-else:
-    install_requires = [
-        "pandas",
-        "xlrd",
-        "pyobjc-core",
-        "pyobjc-framework-Quartz",
-        "image",
-        "pyautogui"
-    ]
+install_requires = [
+    "pandas",
+    "xlrd",
+    "pyautogui"
+]
 
 setup(
     name = "Parcel Manifest",
@@ -24,7 +12,7 @@ setup(
     description = "Automation tool to assist with mundane tasks.",
     author = "Joshua Church",
     author_email = "Joshua.Q.Church@gmail.com",
-    url = "https://github.com/JoshuaQChurch/Parcel-Manifest",
+    url = "https://github.com/JoshuaQChurch/parcel-manifest",
     install_requires = install_requires
 )
 
