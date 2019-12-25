@@ -16,11 +16,11 @@ The following tool was built to allow a user to manifest open cartons and/or rep
    * Unzip the file. 
 
 3. Install additional dependencies
-   * Open *CMD Prompt*..
+   * Open *CMD Prompt*.
    * Navigate to filepath of the downloaded files.
    * Run the following command: *python setup.py install*
    
 4. Place the *macro_win_X.py (where X is 7 or 10)* file in your preferred location on your device
 
-5. Once the following steps are finished, double-click *macro.py* and run the program. 
+5. Once the following steps are finished, double-click *macro_win_X.py* and run the program. 
 
